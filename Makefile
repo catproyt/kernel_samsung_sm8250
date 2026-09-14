@@ -2,7 +2,7 @@
 VERSION = 4
 PATCHLEVEL = 19
 SUBLEVEL = 325
-EXTRAVERSION = -Sora-Catpro
+EXTRAVERSION =
 NAME = Sora Kernel
 
 # Identidad oficial del compilador / desarrollador
