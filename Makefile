@@ -2,8 +2,12 @@
 VERSION = 4
 PATCHLEVEL = 19
 SUBLEVEL = 325
-EXTRAVERSION =
-NAME = "People's Front"
+EXTRAVERSION = -Sora-Catpro
+NAME = Sora Kernel
+
+# Identidad oficial del compilador / desarrollador
+export KBUILD_BUILD_USER := Catpro
+export KBUILD_BUILD_HOST := SoraOS
 
 # *DOCUMENTATION*
 # To see a list of typical targets execute "make help"
