@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-SECONDS=0 # builtin bash timer
+SECONDS=0
 
 GREEN='\033[0;32m'
 RED='\033[0;31m'
@@ -89,7 +89,6 @@ git clone -q -b "$AK3_BRANCH" "$AK3_REPO" AnyKernel3 || exit 1
 
 echo -e "Empaquetando zip flasheable...\n"
 
-# Solo se empaquetan Image y dtb (dtbo.img no aplica en esta rama)
 cp "$BOOT_DIR/Image" AnyKernel3/Image
 if [ -f "$BOOT_DIR/dtb" ]; then
     cp "$BOOT_DIR/dtb" AnyKernel3/dtb
