@@ -64,12 +64,6 @@ make -j$(nproc --all) O=out ARCH=arm64 \
     CC=clang LD=ld.lld AS=llvm-as AR=llvm-ar NM=llvm-nm \
     OBJCOPY=llvm-objcopy OBJDUMP=llvm-objdump STRIP=llvm-strip \
     CROSS_COMPILE=aarch64-linux-gnu- CROSS_COMPILE_ARM32=arm-linux-gnueabi- \
-    LLVM=1 LLVM_IAS=1 dtbo.img
-
-make -j$(nproc --all) O=out ARCH=arm64 \
-    CC=clang LD=ld.lld AS=llvm-as AR=llvm-ar NM=llvm-nm \
-    OBJCOPY=llvm-objcopy OBJDUMP=llvm-objdump STRIP=llvm-strip \
-    CROSS_COMPILE=aarch64-linux-gnu- CROSS_COMPILE_ARM32=arm-linux-gnueabi- \
     LLVM=1 LLVM_IAS=1 Image
 
 if [ -f "$BOOT_DIR/Image" ]; then
@@ -95,9 +89,11 @@ git clone -q -b "$AK3_BRANCH" "$AK3_REPO" AnyKernel3 || exit 1
 
 echo -e "Empaquetando zip flasheable...\n"
 
-cp "$BOOT_DIR/dtbo.img" AnyKernel3/dtbo.img
+# Solo se empaquetan Image y dtb (dtbo.img no aplica en esta rama)
 cp "$BOOT_DIR/Image" AnyKernel3/Image
-cp "$BOOT_DIR/dtb" AnyKernel3/dtb
+if [ -f "$BOOT_DIR/dtb" ]; then
+    cp "$BOOT_DIR/dtb" AnyKernel3/dtb
+fi
 
 cd AnyKernel3
 zip -r9 "../$ZIPNAME" * -x .git README.md *placeholder
