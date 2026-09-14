@@ -1,0 +1,30 @@
+name: Build Sora Kernel A17
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Compilar Kernel Sora (r8q)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout del repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar dependencias
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y bc build-essential libncurses5-dev libssl-dev bison flex \
+            libelf-dev git zip zstd curl jq gcc-aarch64-linux-gnu gcc-arm-linux-gnueabi
+
+      - name: Ejecutar script de compilacion
+        run: |
+          chmod +x build.sh
+          ./build.sh
+
+      - name: Subir artefacto compilado
+        uses: actions/upload-artifact@v4
+        with:
+          name: Sora-Kernel-A17-r8q
+          path: Sora-Kernel-A17-*.zip
